@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4329295, g: 0.46931827, b: 0.5045527, a: 1}
+  m_IndirectSpecularColor: {r: 0.44290444, g: 0.4920764, b: 0.5718255, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -379,13 +379,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: -0.9594355, y: 0.21618779, z: 0.14230372, w: -0.11178554}
+  m_LocalRotation: {x: -0.78876233, y: 0.2579366, z: 0.021411525, w: -0.5575521}
   m_LocalPosition: {x: 0, y: 3, z: 8.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 8.799, y: -161.021, z: 206.87}
+  m_LocalEulerAnglesHint: {x: 60.286, y: -139.578, z: 240.35}
 --- !u!1 &925916323
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,10 +674,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1, y: 1}
-      - {x: -1, y: 1}
-      - {x: -1, y: -1}
-      - {x: 1, y: -1}
+    - - {x: 10, y: 10}
+      - {x: -10, y: 10}
+      - {x: -10, y: -10}
+      - {x: 10, y: -10}
 --- !u!1 &1385422606
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,7 +975,7 @@ MeshCollider:
   m_GameObject: {fileID: 1502177596}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -1183,7 +1183,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828928255}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.22, z: 0}
+  m_LocalPosition: {x: 5.71, y: 0.22, z: -1.3}
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 925916324}

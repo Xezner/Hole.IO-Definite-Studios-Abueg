@@ -27,11 +27,9 @@ public class OnChangePosition : MonoBehaviour
     //FixedUpdate is used whenever there is physics involved.
     private void FixedUpdate()
     {
-       
         //makes sure that there's a change in the transform
         if (transform.hasChanged == true)
         {
-            
             transform.hasChanged = false;
             SetHoleCollider2D();
             SetGroundCollider2D();
@@ -42,10 +40,13 @@ public class OnChangePosition : MonoBehaviour
 
     private void SetHoleCollider2D()
     {
+        initialScale = transform.localScale.x / 2;
         //sets the position of the hole collider to the position of the hole
         hole2dCollider.transform.position = new Vector2(transform.position.x, transform.position.z);
         //rescales the hole collider to the scale of the hole's radius
-        hole2dCollider.transform.localScale = transform.localScale * initialScale;
+        //hole2dCollider.transform.localScale = transform.localScale * initialScale;
+        hole2dCollider.transform.localScale = new Vector2(transform.localScale.x * initialScale, transform.localScale.z * initialScale);
+
     }
 
     private void SetGroundCollider2D()
@@ -75,11 +76,9 @@ public class OnChangePosition : MonoBehaviour
         {
             PointPositions[i] = hole2dCollider.transform.TransformPoint(PointPositions[i]);
         }
-
         //set the path to 2 in order to add an element to be able to set the 
         ///coordinates of where the hole of the ground is supposed to be
         ground2DCollider.pathCount = 2;
-
         //basically set the coordinates of the hole of the ground to the coordinates of the hole of the player
         ground2DCollider.SetPath(1, PointPositions);
     }
