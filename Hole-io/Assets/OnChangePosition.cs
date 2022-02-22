@@ -23,6 +23,7 @@ public class OnChangePosition : MonoBehaviour
     Mesh GenMesh;
     private void FixedUpdate()
     {
+
         if(transform.hasChanged == true)
         {
             transform.hasChanged = false;
