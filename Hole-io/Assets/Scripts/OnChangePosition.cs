@@ -4,10 +4,23 @@ using UnityEngine;
 
 public class OnChangePosition : MonoBehaviour
 {
+    public PolygonCollider2D hole2dCollider;
+    public PolygonCollider2D ground2DCollider;
+    public MeshCollider GeneratedMeshCollider;
+    public GameObject GroundObject;
+    public float initialScale = 0.5f;
+    Mesh GenMesh;
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject[] Obstacles = FindObjectsOfType(typeof(GameObject)) as GameObject[];
+        foreach (var GameObj in Obstacles)
+        {
+            if (GameObj.layer == LayerMask.NameToLayer("Obstacles"))
+            {
+                Physics.IgnoreCollision(GameObj.GetComponent<Collider>(), GeneratedMeshCollider, true);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -16,12 +29,7 @@ public class OnChangePosition : MonoBehaviour
         
     }
 
-    public PolygonCollider2D hole2dCollider;
-    public PolygonCollider2D ground2DCollider;
-    public MeshCollider GeneratedMeshCollider;
-    public GameObject GroundObject;
-    public float initialScale = 0.5f;
-    Mesh GenMesh;
+    
     
 
     //FixedUpdate is used whenever there is physics involved.

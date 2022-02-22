@@ -15,4 +15,18 @@ public class CollisionDetection : MonoBehaviour
     {
         
     }
+
+    public Collider GroundCollider;
+    public MeshCollider GroundMeshCollider;
+    private void OnTriggerEnter(Collider other)
+    {
+        Physics.IgnoreCollision(other, GroundCollider, true);
+        Physics.IgnoreCollision(other, GroundMeshCollider, false);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Physics.IgnoreCollision(other, GroundCollider, false);
+        Physics.IgnoreCollision(other, GroundMeshCollider, true);
+    }
 }
