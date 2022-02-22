@@ -34,8 +34,10 @@ public class OnChangePosition : MonoBehaviour
         }
     }
 
+    //Makes a Hole on the Ground Collider
     private void MakeHole2D()
     {
+        //gets the points of the hole collider and saves it into an array
         Vector2[] PointPositions = hole2dCollider.GetPath(0);
 
         for ( int i = 0; i < PointPositions.Length; i++)
@@ -43,6 +45,7 @@ public class OnChangePosition : MonoBehaviour
             PointPositions[i] = hole2dCollider.transform.TransformPoint(PointPositions[i]);
         }
 
+        
         ground2DCollider.pathCount = 2;
         ground2DCollider.SetPath(1, PointPositions);
     }
