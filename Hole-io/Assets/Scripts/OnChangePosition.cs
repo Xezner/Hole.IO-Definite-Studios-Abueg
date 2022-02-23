@@ -8,7 +8,7 @@ public class OnChangePosition : MonoBehaviour
     public PolygonCollider2D ground2DCollider;
     public MeshCollider GeneratedMeshCollider;
     public GameObject GroundObject;
-    public float initialScale = 0.5f;
+    public float initialScale = 0f;
     Mesh GenMesh;
     // Start is called before the first frame update
     void Start()
