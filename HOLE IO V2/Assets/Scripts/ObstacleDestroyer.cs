@@ -5,9 +5,11 @@ using UnityEngine;
 public class ObstacleDestroyer : MonoBehaviour
 {
     [SerializeField] private GameObject ground;
+    private GameManager gameManager;
     private void Start()
     {
         ground = GameObject.FindWithTag("Ground");
+
         ScaleCollider();
     }
     // Start is called before the first frame update

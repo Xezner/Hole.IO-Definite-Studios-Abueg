@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,18 @@ public class GameManager : MonoBehaviour
 
     public GameState State;
 
+    public static event Action<GameState> OnGameStateChanged;
+
     private void Awake()
     {
         Instance = this;
     }
     // Start is called before the first frame update
-    
+
+    private void Start()
+    {
+        UpdateGameState(GameState.holeColor);
+    }
     public void UpdateGameState(GameState newState)
     {
         State = newState;
@@ -26,14 +33,22 @@ public class GameManager : MonoBehaviour
             case GameState.holeSize:
                 break; 
             case GameState.holeColor:
+                selectHoleColor();
                 break;
             case GameState.playerRank:
                 break;
-            case GameState.gameTimer;
+            case GameState.gameTimer:
                 break;
             default:
-                break;
+                throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
+
+        OnGameStateChanged?.Invoke(newState);
+    }
+
+    private void selectHoleColor()
+    {
+        throw new NotImplementedException();
     }
 
     public enum GameState
