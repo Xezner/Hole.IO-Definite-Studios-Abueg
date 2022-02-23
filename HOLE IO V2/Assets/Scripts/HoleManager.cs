@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HoleManager : MonoBehaviour
 {
+    public static HoleManager Instance;
     public PolygonCollider2D hole2DCollider;
     public PolygonCollider2D ground2DCollider;
     public MeshCollider GeneratedMeshCollider;
@@ -82,5 +83,21 @@ public class HoleManager : MonoBehaviour
         if (GeneratedMeshCollider != null) Destroy(GeneratedMesh);
         GeneratedMesh = ground2DCollider.CreateMesh(true, true);
         GeneratedMeshCollider.sharedMesh = GeneratedMesh;
+    }
+
+    //coroutine for scaling the hloe
+    public IEnumerator ScaleHole()
+    {
+        Debug.Log("GROWING");
+        Vector3 StartScale = transform.localScale;
+        Vector3 EndScale = StartScale * 2;
+
+        float t = 0;
+        while ( t <= 0.4f)
+        {
+            t += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(StartScale, EndScale, t);
+            yield return null;
+        }
     }
 }

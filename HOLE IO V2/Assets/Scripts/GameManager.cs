@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] HoleManager holeManager;
     public static GameManager Instance;
-
     public GameState State;
-
     public static event Action<GameState> OnGameStateChanged;
+    private int score = 0;
 
     private void Awake()
     {
@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateGameState(GameState.holeColor);
     }
     public void UpdateGameState(GameState newState)
     {
@@ -29,8 +28,10 @@ public class GameManager : MonoBehaviour
             case GameState.isGameActive:
                 break;
             case GameState.playerScore:
+                handlePlayerScore();
                 break;
             case GameState.holeSize:
+                handleHoleSize();
                 break; 
             case GameState.holeColor:
                 selectHoleColor();
@@ -46,9 +47,25 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(newState);
     }
 
+    private void handleHoleSize()
+    {
+
+        StartCoroutine(holeManager.ScaleHole());
+    }
+
+    private void handlePlayerScore()
+    {
+        score++;
+        Debug.Log(score);
+        if(score % 10 == 0)
+        {
+            UpdateGameState(GameState.holeSize);
+        }
+    }
+
     private void selectHoleColor()
     {
-        throw new NotImplementedException();
+
     }
 
     public enum GameState

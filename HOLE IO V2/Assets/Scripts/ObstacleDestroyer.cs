@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ObstacleDestroyer : MonoBehaviour
 {
+    
+    public static ObstacleDestroyer Instance;
     [SerializeField] private GameObject ground;
-    private GameManager gameManager;
+
     private void Start()
     {
         ground = GameObject.FindWithTag("Ground");
@@ -17,6 +19,7 @@ public class ObstacleDestroyer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroy(other.gameObject);
+        GameManager.Instance.UpdateGameState(GameManager.GameState.playerScore);
     }
 
     //rescales the "Dead Zone" to the size of our ground
