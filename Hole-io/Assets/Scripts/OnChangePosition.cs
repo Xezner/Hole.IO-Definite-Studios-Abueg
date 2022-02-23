@@ -8,7 +8,7 @@ public class OnChangePosition : MonoBehaviour
     public PolygonCollider2D ground2DCollider;
     public MeshCollider GeneratedMeshCollider;
     public GameObject GroundObject;
-    public float initialScale = 0f;
+    public float initialScale = 0.5f;
     Mesh GenMesh;
     // Start is called before the first frame update
 
@@ -21,7 +21,7 @@ public class OnChangePosition : MonoBehaviour
         {
             transform.hasChanged = false;
             SetHoleCollider2D();
-            //SetGroundCollider2D();
+            SetGroundCollider2D();
             MakeHole2D();
             MakeMeshCollider();
         }
@@ -29,7 +29,7 @@ public class OnChangePosition : MonoBehaviour
 
     private void SetHoleCollider2D()
     {
-        initialScale = transform.localScale.x / 2f;
+        //initialScale = transform.localScale.x / 2f; <- didn't work
         //sets the position of the hole collider to the position of the hole
         hole2dCollider.transform.position = new Vector2(transform.position.x, transform.position.z);
         //rescales the hole collider to the scale of the hole's radius
