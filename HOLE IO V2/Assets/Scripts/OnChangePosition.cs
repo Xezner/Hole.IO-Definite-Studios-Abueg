@@ -9,16 +9,18 @@ public class OnChangePosition : MonoBehaviour
     public MeshCollider GeneratedMeshCollider;
     //
     public GameObject GroundObject;
-    public float initialScale = 0.5f;
+    public float initialScale = 0f;
     Mesh GeneratedMesh;
 
     private void Start()
     {
-        
+        //scales the hole collider based off of the radius of the hole
+        initialScale = transform.localScale.x / 2f;
     }
+    //FixedUpdate is used whenever there is physics involved.
     private void FixedUpdate()
     {
-        
+        //makes sure that there's a change in the transform of the player
         if (transform.hasChanged == true)
         {
             transform.hasChanged = false;
@@ -31,8 +33,9 @@ public class OnChangePosition : MonoBehaviour
 
     private void SetHoleCollider2D()
     {
-        //initialScale = transform.localScale.x /2f; <- didn't work
+        //sets the position of the hole collider to the position of the hole
         hole2DCollider.transform.position = new Vector2(transform.position.x, transform.position.z);
+        //rescales the hole collider to the scale of the hole's radius
         //hole2DCollider.transform.localScale = transform.localScale * initialScale;
         hole2DCollider.transform.localScale = new Vector2(transform.localScale.x * initialScale, transform.localScale.z * initialScale);
     }
@@ -55,20 +58,27 @@ public class OnChangePosition : MonoBehaviour
         ground2DCollider.SetPath(0, PointPositions);
     }
 
+    //Makes a Hole on the Ground Collider
     private void MakeHole2D()
     {
+        //gets the points of the element 0 of the hole collider in the first path which is index 0, and saves it into an array
         Vector2[] PointPositions = hole2DCollider.GetPath(0);
 
         for(int i = 0; i < PointPositions.Length; i++)
         {
             PointPositions[i] = hole2DCollider.transform.TransformPoint(PointPositions[i]);
         }
+        //set the path to 2 in order to add an element to be able to set the 
+        ///coordinates of where the hole of the ground is supposed to be
         ground2DCollider.pathCount = 2;
+        //basically set the coordinates of the hole of the ground to the coordinates of the hole of the player
         ground2DCollider.SetPath(1, PointPositions);
     }
 
+    //creates the mesh collider for the ground
     private void Make3DMeshCollider()
     {
+        //makes sure that there's no generated mesh before generating a new mesh based off of the ground collider
         if (GeneratedMeshCollider != null) Destroy(GeneratedMesh);
         GeneratedMesh = ground2DCollider.CreateMesh(true, true);
         GeneratedMeshCollider.sharedMesh = GeneratedMesh;
