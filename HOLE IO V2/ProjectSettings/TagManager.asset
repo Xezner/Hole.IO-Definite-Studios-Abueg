@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Arrow
+  - Color Picker
   layers:
   - Default
   - TransparentFX

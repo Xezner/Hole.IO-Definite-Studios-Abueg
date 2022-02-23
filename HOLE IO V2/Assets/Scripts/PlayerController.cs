@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     float boundaryZ = 0f;
     private bool isMoving;
 
+    [SerializeField] GameObject menu;
+    private bool isMenuOpen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,52 @@ public class PlayerController : MonoBehaviour
         boundaryZ = Ground.transform.localScale.z / 2;
         SpawnPoint();
         isMoving = false;
+
+        menu.gameObject.SetActive(false);
+        isMenuOpen = false;
+
     }
+    private void MenuScreen()
+    {
+        if (!isMenuOpen)
+        {
+            if (Input.GetKeyDown("q"))
+            {
+                Debug.Log("TRUE");
+                menu.gameObject.SetActive(true);
+                isMenuOpen = true;
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown("q"))
+            {
+                menu.gameObject.SetActive(false);
+                isMenuOpen = false;
+            }
+        }
+    }
+    private void Update()
+    {
+        MenuScreen();
+    }
+
+    /*public void MenuScreen()
+    {
+        if (menuPressed)
+        {
+            Menu.gameObject.SetActive(false);
+        }
+        else if (!menuPressed)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("HERE");
+                Menu.gameObject.SetActive(true);
+            }
+            menuPressed = true;
+        }
+    }*/
 
     private void FixedUpdate()
     {

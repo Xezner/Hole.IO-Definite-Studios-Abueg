@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
     private int score = 0;
-
+    
     private void Awake()
     {
         Instance = this;
@@ -19,7 +19,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+
     }
+
+    public void Update()
+    {
+
+    }
+
+    
     public void UpdateGameState(GameState newState)
     {
         State = newState;
