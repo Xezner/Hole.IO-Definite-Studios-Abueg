@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2514586757169605992
+--- !u!114 &-1545864649302136791
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Basic
-  m_Shader: {fileID: -6465566751694194690, guid: 23664d17369b8f840ac478599c3fc56c, type: 3}
+  m_Name: Hole
+  m_Shader: {fileID: -6465566751694194690, guid: 033b99ec218536d4999150e7701e4b68, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -89,6 +89,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_b62fda63f7fc4e259c4f42d9ebc4abc7: -5
+    - Vector1_fd2f6cfeac874558b27a9dc97b976ffb: 10
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -116,6 +118,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_0a6a022557854e69a3da483c4dc450fe: {r: 0.03343046, g: 1, b: 0, a: 0}
+    - Color_665f3fcd5a004934a8efe3adee737768: {r: 1, g: 0.042452812, b: 0.042452812, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
