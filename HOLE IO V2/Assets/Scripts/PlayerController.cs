@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
         Ground = GameObject.FindGameObjectWithTag("Ground");
         boundaryX = Ground.transform.localScale.x / 2;
         boundaryZ = Ground.transform.localScale.z / 2;
+        SpawnPoint();
         isMoving = false;
     }
 
@@ -29,7 +30,10 @@ public class PlayerController : MonoBehaviour
         PlayerMovement();
         MouseMovement();
     }
-
+    public void SpawnPoint()
+    {
+        transform.position = new Vector3(Random.Range(-boundaryX, boundaryX), 0, Random.Range(-boundaryZ, boundaryZ));
+    }
     public void MouseMovement()
     {
         //created a raycast inorder to get the position of the mouse relative to the worldpoint
