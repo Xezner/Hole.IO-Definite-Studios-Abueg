@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollisionDetection : MonoBehaviour
 {
     public Collider GroundCollider;
-    public OnChangePosition onChangePosition;
+    public HoleManager onChangePosition;
     // Start is called before the first frame update
     private void Start()
     {

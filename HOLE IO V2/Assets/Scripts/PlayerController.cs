@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     GameObject Ground;
     float boundaryX = 0f;
     float boundaryZ = 0f;
+    private bool isMoving;
     Vector3 newPosition;
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         boundaryX = Ground.transform.localScale.x / 2;
         boundaryZ = Ground.transform.localScale.z / 2;
         newPosition = transform.position;
+        isMoving = false;
     }
 
     public void Move(BaseEventData myEvent)
@@ -46,46 +48,17 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit raycastHit))
         {
             Vector3 rayHit = raycastHit.point;
-            //rayHit = new Vector3(rayHit.x, 0.1f, rayHit.z);
-            //transform.position = rayHit;
-            //Debug.Log(rayHit);
-
             Vector3 direction = rayHit - transform.position;
             direction = new Vector3(direction.x, 0f, direction.z);
-            //Debug.Log("Direction: " + direction);
-            /*if((direction.x * movementSpeed) > 2f)
-            {
-                direction.x = 1f;
-            }
-            if((direction.x * movementSpeed) < -2f)
-            {
-                direction.x = -1f;
-            }
-            if ((direction.z * movementSpeed) > 2f)
-            {
-                direction.z = 1f;
-            }
-            if ((direction.z * movementSpeed) < -2f)
-            {
-                direction.z = -1f;
-            }*/
-           
             
 
             if (Input.GetMouseButton(0))
             {
+                isMoving = true;
                 float angle = Vector3.Angle(new Vector3(0.01f, 0.0f, 0.0f), direction);
                 if (direction.z < 0) angle = -angle;
-                float side;
-                if (Vector3.Angle(new Vector3(0.01f, 0.0f, 0.0f), direction - new Vector3(0.01f, 0.0f, 0.0f)) > 90f) side = 360f - angle;
-                else side = angle;
-                //Debug.Log(side);
-                Debug.Log("Angle: " + angle);
                 Vector2 MyVector = new Vector2((float)Mathf.Cos(angle * Mathf.PI / 180), (float)Mathf.Sin(angle * Mathf.PI / 180));
-                Debug.Log("Vector:" + MyVector);
                 direction = new Vector3(MyVector.x, 0f, MyVector.y);
-                Debug.Log("Direction: " + direction);
-
                 transform.Translate(direction * movementSpeed * Time.deltaTime, Space.World);
                 if (direction != Vector3.zero)
                 {
@@ -94,7 +67,10 @@ public class PlayerController : MonoBehaviour
 
                 }
             }
-            //transform.position = transform.forward + new Vector3(0,0,1);
+            else
+            {
+                isMoving = false;
+            }
         }
     }
     public void PlayerMovement()
@@ -117,7 +93,7 @@ public class PlayerController : MonoBehaviour
         //translates the direction to move the object based on the movementSpeed in deltatime on the world
         if (horizontalInput != 0 || verticalInput != 0)
         {
-            transform.Translate(direction * movementSpeed * Time.deltaTime, Space.World);
+            if(!isMoving)transform.Translate(direction * movementSpeed * Time.deltaTime, Space.World);
         }
         /*if (Input.GetMouseButton(0))
         {
