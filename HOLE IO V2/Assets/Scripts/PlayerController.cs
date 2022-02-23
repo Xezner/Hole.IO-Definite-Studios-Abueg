@@ -9,9 +9,15 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 2f;
     public float verticalInput;
     public float horizontalInput;
+    public GameObject arrowIndicator;
+    Vector3 previousPosition;
+    Vector3 lastMoveDirection;
     // Start is called before the first frame update
     void Start()
     {
+        arrowIndicator = GameObject.FindGameObjectWithTag("Player");
+        previousPosition = transform.position;
+        lastMoveDirection = Vector3.zero;
         
     }
 
@@ -31,11 +37,13 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
         Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput);
-
-        if (direction.magnitude >= 0.1f)
+        transform.Translate(direction * movementSpeed * Time.deltaTime, Space.World);
+        if (direction != Vector3.zero)
         {
-            transform.position += (direction * movementSpeed * Time.deltaTime);
-            //controller.Move(direction * movementSpeed * Time.deltaTime);
+            Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 100f);
         }
     }
+
+
 }

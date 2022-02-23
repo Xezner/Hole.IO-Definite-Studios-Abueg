@@ -46,8 +46,6 @@ public class OnChangePosition : MonoBehaviour
         //sets the X, and Z, points for Ground Collider to allow the Ground Collider to resize on the scale of the Ground Object
         elemX = GroundObject.transform.localScale.x / 2;
         elemZ = GroundObject.transform.localScale.z / 2;
-        Debug.Log(elemX);
-        Debug.Log(elemZ);
         Vector2 elem0 = new Vector2(elemX, elemZ);
         Vector2 elem1 = new Vector2(-elemX, elemZ);
         Vector2 elem2 = new Vector2(-elemX, -elemZ);
