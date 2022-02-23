@@ -10,32 +10,20 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 2f;
     public float verticalInput;
     public float horizontalInput;
-    float verticalMouseInput;
-    float horizontalMouseInput;
-    public GameObject arrowIndicator;
     GameObject Ground;
     float boundaryX = 0f;
     float boundaryZ = 0f;
     private bool isMoving;
-    Vector3 newPosition;
+
     // Start is called before the first frame update
     void Start()
     {
         Ground = GameObject.FindGameObjectWithTag("Ground");
-        arrowIndicator = GameObject.FindGameObjectWithTag("Player");
         boundaryX = Ground.transform.localScale.x / 2;
         boundaryZ = Ground.transform.localScale.z / 2;
-        newPosition = transform.position;
         isMoving = false;
     }
 
-    public void Move(BaseEventData myEvent)
-    {
-        if(((PointerEventData)myEvent).pointerCurrentRaycast.isValid)
-        {
-            transform.position = (((PointerEventData)myEvent).pointerCurrentRaycast.worldPosition);
-        }
-    }
     private void FixedUpdate()
     {
         PlayerMovement();

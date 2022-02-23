@@ -9,6 +9,8 @@ public class CollisionDetection : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        //finds all of the obstacle game objects in the game and ignores collision with the mesh collider at the start of
+        // the game and only when is in contact with the hole to optimize the game
         GameObject[] Obstacles = FindObjectsOfType(typeof(GameObject)) as GameObject[];
         foreach (var GameObj in Obstacles)
         {

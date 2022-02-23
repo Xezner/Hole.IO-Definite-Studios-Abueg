@@ -11,12 +11,15 @@ public class ObstacleDestroyer : MonoBehaviour
         ground = GameObject.FindWithTag("Ground");
         ScaleCollider();
     }
-    // Start is called before the first frame update
+
+    
+    //destroys the obstacles once it hits the "Dead zone"
     private void OnTriggerEnter(Collider other)
     {
         Destroy(other.gameObject);
     }
 
+    //rescales the "Dead Zone" to the size of our ground
     private void ScaleCollider()
     {
         transform.localScale = new Vector3(ground.transform.localScale.x, 1f, ground.transform.localScale.z);
