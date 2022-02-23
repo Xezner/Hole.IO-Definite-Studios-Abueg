@@ -1508,6 +1508,8 @@ MonoBehaviour:
   movementSpeed: 5
   verticalInput: 0
   horizontalInput: 0
+  menu: {fileID: 1405710830}
+  menuManager: {fileID: 1405710831}
 --- !u!4 &894057188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8687373752295037299, guid: cebe159d41a4e7041b58ec1f9ca1565e, type: 3}
@@ -2134,7 +2136,7 @@ GameObject:
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2151,6 +2153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fcp: {fileID: 2044645482}
+  isSkinsClicked: 0
 --- !u!114 &1405710832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2717,7 +2720,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holeManager: {fileID: 890261565}
-  Menu: {fileID: 1405710830}
   State: 0
 --- !u!4 &2017490074
 Transform:

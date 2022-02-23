@@ -6,7 +6,7 @@ public class MenuManager : MonoBehaviour
 {
     
     [SerializeField] GameObject fcp;
-    private bool isSkinsClicked;
+    public bool isSkinsClicked;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,5 +36,10 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void ClosedByMenu()
+    {
+        fcp.gameObject.SetActive(false);
+        isSkinsClicked = false;
+    }
     
 }
