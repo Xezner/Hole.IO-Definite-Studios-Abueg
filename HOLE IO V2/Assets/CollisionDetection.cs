@@ -7,10 +7,8 @@ public class CollisionDetection : MonoBehaviour
     public Collider GroundCollider;
     public OnChangePosition onChangePosition;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        //all obstacles should avoid collision on start with the "hole" mesh collider mesh to optimize the game
-
         GameObject[] Obstacles = FindObjectsOfType(typeof(GameObject)) as GameObject[];
         foreach (var GameObj in Obstacles)
         {
@@ -21,7 +19,6 @@ public class CollisionDetection : MonoBehaviour
         }
     }
 
-    
     private void OnTriggerEnter(Collider other)
     {
         //in theory the ground mesh collider is the hole itself while the Hole that you see is just a sprite

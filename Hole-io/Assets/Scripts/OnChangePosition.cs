@@ -11,26 +11,7 @@ public class OnChangePosition : MonoBehaviour
     public float initialScale = 0f;
     Mesh GenMesh;
     // Start is called before the first frame update
-    void Start()
-    {
-        GameObject[] Obstacles = FindObjectsOfType(typeof(GameObject)) as GameObject[];
-        foreach (var GameObj in Obstacles)
-        {
-            if (GameObj.layer == LayerMask.NameToLayer("Obstacles"))
-            {
-                Physics.IgnoreCollision(GameObj.GetComponent<Collider>(), GeneratedMeshCollider, true);
-            }
-        }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    
-    
 
     //FixedUpdate is used whenever there is physics involved.
     private void FixedUpdate()
@@ -40,7 +21,7 @@ public class OnChangePosition : MonoBehaviour
         {
             transform.hasChanged = false;
             SetHoleCollider2D();
-            SetGroundCollider2D();
+            //SetGroundCollider2D();
             MakeHole2D();
             MakeMeshCollider();
         }
@@ -48,7 +29,7 @@ public class OnChangePosition : MonoBehaviour
 
     private void SetHoleCollider2D()
     {
-        initialScale = transform.localScale.x / 2;
+        initialScale = transform.localScale.x / 2f;
         //sets the position of the hole collider to the position of the hole
         hole2dCollider.transform.position = new Vector2(transform.position.x, transform.position.z);
         //rescales the hole collider to the scale of the hole's radius
