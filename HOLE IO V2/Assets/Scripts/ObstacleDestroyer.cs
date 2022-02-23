@@ -9,7 +9,6 @@ public class ObstacleDestroyer : MonoBehaviour
     private void Start()
     {
         ground = GameObject.FindWithTag("Ground");
-
         ScaleCollider();
     }
     // Start is called before the first frame update
