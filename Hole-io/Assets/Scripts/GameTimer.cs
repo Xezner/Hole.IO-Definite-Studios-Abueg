@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameTimer : MonoBehaviour
 {
-    public PlayerController player;
+    [SerializeField] GameObject gameOverMenu;
+    [SerializeField] GameObject timeScoreMenu;
     public static GameTimer instance;
     public TextMeshProUGUI timerText;
     public GameManagement gm;
@@ -23,7 +24,8 @@ public class GameTimer : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        player.enabled = true;
+        timeScoreMenu.SetActive(true);
+        gameOverMenu.SetActive(false);
         SetTimer();
     }
     private void SetTimer()
@@ -45,9 +47,13 @@ public class GameTimer : MonoBehaviour
 
     public void EndTimer()
     {
-        Debug.Log(isTimerGoing);
         isTimerGoing = false;
-        player.enabled = false;
+        PlayerController.Instance.enabled = false;
+        int myScore = GameManager.Instance.score;
+        Debug.Log(myScore);
+        timeScoreMenu.SetActive(false);
+        gameOverMenu.SetActive(true);
+        
     }
 
 

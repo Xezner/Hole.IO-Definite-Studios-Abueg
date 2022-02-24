@@ -7,18 +7,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameTimer gameTimer;
     [SerializeField] HoleManager holeManager;
     public static GameManager Instance;
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
     public Hole hole;
-    private int score = 0;
+    public int score = 0;
     public int points = 0;
     private int growth = 1;
 
     public TextMeshProUGUI scoreText;
-    
+    public TextMeshProUGUI inputPlayerName;
     
     private void Awake()
     {
@@ -33,6 +32,12 @@ public class GameManager : MonoBehaviour
     
     public void GameStart()
     {
+
+        if(inputPlayerName.text.Length <=1)
+        {
+            hole.playerName = "ANON";
+        }
+        else hole.playerName = inputPlayerName.text;
         SceneManager.LoadScene("Main Scene", LoadSceneMode.Single);
     }
 
@@ -54,9 +59,6 @@ public class GameManager : MonoBehaviour
             case GameState.holeSize:
                 handleHoleSize();
                 break;
-            case GameState.gameOver:
-                handleGameOver();
-                break;
             case GameState.playerRank:
                 break;
             default:
@@ -66,10 +68,7 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(newState);
     }
 
-    private void handleGameOver()
-    {
-        
-    }
+
 
     private void handleHoleSize()
     {

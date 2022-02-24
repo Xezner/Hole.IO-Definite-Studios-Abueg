@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
-
+    public static PlayerController Instance;
     public Hole hole;
     //public CharacterController controller;
     public float movementSpeed = 2f;
@@ -21,6 +22,12 @@ public class PlayerController : MonoBehaviour
     private bool isMenuOpen;
     [SerializeField] MenuManager menuManager = null;
 
+    public TextMeshPro playerName;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +36,7 @@ public class PlayerController : MonoBehaviour
         boundaryZ = Ground.transform.localScale.z / 2;
         SpawnPoint();
         isMoving = false;
-
+        playerName.text = hole.playerName;
         menu.gameObject.SetActive(false);
         isMenuOpen = false;
 
@@ -49,7 +56,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown("q"))
             {
                 menu.gameObject.SetActive(false);
-                menuManager.ClosedByMenu();
+                //menuManager.ClosedByMenu();
                 isMenuOpen = false;
             }
         }
