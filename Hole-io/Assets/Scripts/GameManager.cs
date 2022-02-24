@@ -48,6 +48,15 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Main Scene", LoadSceneMode.Single);
     }
 
+    public void BackToStart()
+    {
+        SceneManager.LoadScene("Title Scene", LoadSceneMode.Single);
+    }
+
+    public void ExitApplication()
+    {
+        Application.Quit();
+    }
     public void Update()
     {
 
