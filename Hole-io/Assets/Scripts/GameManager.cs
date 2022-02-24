@@ -32,12 +32,19 @@ public class GameManager : MonoBehaviour
     
     public void GameStart()
     {
-
-        if(inputPlayerName.text.Length <=1)
+        if (inputPlayerName != null)
         {
-            hole.playerName = "ANON";
+            if (inputPlayerName.text.Length <= 1)
+            {
+                hole.playerName = "ANON";
+            }
+            else hole.playerName = inputPlayerName.text;
         }
-        else hole.playerName = inputPlayerName.text;
+        SceneManager.LoadScene("Main Scene", LoadSceneMode.Single);
+    }
+
+    public void GameRestart()
+    {
         SceneManager.LoadScene("Main Scene", LoadSceneMode.Single);
     }
 

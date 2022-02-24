@@ -9,6 +9,8 @@ public class GameTimer : MonoBehaviour
 {
     [SerializeField] GameObject gameOverMenu;
     [SerializeField] GameObject timeScoreMenu;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI nameText;
     public static GameTimer instance;
     public TextMeshProUGUI timerText;
     public GameManagement gm;
@@ -24,6 +26,7 @@ public class GameTimer : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        PlayerController.Instance.enabled = true;
         timeScoreMenu.SetActive(true);
         gameOverMenu.SetActive(false);
         SetTimer();
@@ -50,12 +53,19 @@ public class GameTimer : MonoBehaviour
         isTimerGoing = false;
         PlayerController.Instance.enabled = false;
         int myScore = GameManager.Instance.score;
-        Debug.Log(myScore);
+        scoreText.text = "Your score: " + myScore.ToString();
+        string myName = PlayerController.Instance.hole.playerName;
+        nameText.text = "Your name: " + myName;
+        SaveSystem.Instance.highScore();
         timeScoreMenu.SetActive(false);
         gameOverMenu.SetActive(true);
         
     }
 
+    private void SaveScoreName(int Score, string Name)
+    {
+        //FileHandler.SaveToJSON<Hi
+    }
 
     private void Update()
     {
