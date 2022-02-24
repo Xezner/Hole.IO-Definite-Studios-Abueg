@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ObstacleDestroyer : MonoBehaviour
 {
-    
+    public Obstacles house;
+    public Obstacles smallBuilding;
     public static ObstacleDestroyer Instance;
     [SerializeField] private GameObject ground;
 
@@ -19,13 +20,13 @@ public class ObstacleDestroyer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroy(other.gameObject);
-        if(other.gameObject.CompareTag("Small Building"))
+        if(other.gameObject.CompareTag(smallBuilding.name))
         {
-            GameManager.Instance.points = 2;
+            GameManager.Instance.points = smallBuilding.pointsGiven;
         }
-        else if(other.gameObject.CompareTag("House"))
+        else if(other.gameObject.CompareTag(house.name))
         {
-            GameManager.Instance.points = 1;
+            GameManager.Instance.points = house.pointsGiven;
         }
         GameManager.Instance.UpdateGameState(GameManager.GameState.playerScore);
     }

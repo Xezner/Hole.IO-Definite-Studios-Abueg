@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacles : MonoBehaviour
+[CreateAssetMenu(fileName = "Obstacles")]
+public class Obstacles : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string obstacleName;
+    public int pointsGiven;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
