@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     private int score = 0;
     public int points = 0;
     private int growth = 0;
+    public TextMeshProUGUI scoreText;
     private void Awake()
     {
         Instance = this;
@@ -69,8 +71,8 @@ public class GameManager : MonoBehaviour
     private void handlePlayerScore()
     {
         score += points;
-        Debug.Log(score);
-        if(score % (10 + (growth*10)) == 0)
+        scoreText.text = "Score: " + score;
+        if (score % (10 + (growth*10)) == 0)
         {
             UpdateGameState(GameState.holeSize);
             growth++;
