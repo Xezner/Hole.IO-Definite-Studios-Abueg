@@ -725,7 +725,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: '
+  m_text: 'Score: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -889,6 +889,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63930251fdf75f04582ba918a0d38383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  house: {fileID: 11400000, guid: 931c83561a9dc76419835c4526920090, type: 2}
+  smallBuilding: {fileID: 11400000, guid: 1c822fdc60063a6458a658e759503c60, type: 2}
   ground: {fileID: 0}
 --- !u!65 &519589132
 BoxCollider:
@@ -1658,6 +1660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 963194227}
+  hole: {fileID: 0}
   movementSpeed: 5
   verticalInput: 0
   horizontalInput: 0
