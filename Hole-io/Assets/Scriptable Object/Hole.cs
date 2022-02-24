@@ -7,7 +7,7 @@ public class Hole : ScriptableObject
 {
     public string playerName;
     public float moveSpeed;
-    public float holeScale;
+    public float pointsNeededToGrowMultipler;
     public Material holeMaterial;
     public Material arrowMaterial;
 }

@@ -7,14 +7,19 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameTimer gameTimer;
     [SerializeField] HoleManager holeManager;
     public static GameManager Instance;
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
+    public Hole hole;
     private int score = 0;
     public int points = 0;
-    private int growth = 0;
+    private int growth = 1;
+
     public TextMeshProUGUI scoreText;
+    
+    
     private void Awake()
     {
         Instance = this;
@@ -22,8 +27,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
 
     private void Start()
-    {
+    {   
+    }
 
+    
+    public void GameStart()
+    {
+        SceneManager.LoadScene("Main Scene", LoadSceneMode.Single);
     }
 
     public void Update()
@@ -31,35 +41,34 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void GameStart()
-    {
-        SceneManager.LoadScene("Main Scene");
-    }
+   
+
     public void UpdateGameState(GameState newState)
     {
         State = newState;
         switch (newState)
-        {
-            case GameState.isGameActive:
-                break;
+        { 
             case GameState.playerScore:
                 handlePlayerScore();
                 break;
             case GameState.holeSize:
                 handleHoleSize();
-                break; 
-            case GameState.holeColor:
-                selectHoleColor();
+                break;
+            case GameState.gameOver:
+                handleGameOver();
                 break;
             case GameState.playerRank:
-                break;
-            case GameState.gameTimer:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
 
         OnGameStateChanged?.Invoke(newState);
+    }
+
+    private void handleGameOver()
+    {
+        
     }
 
     private void handleHoleSize()
@@ -72,18 +81,12 @@ public class GameManager : MonoBehaviour
     {
         score += points;
         scoreText.text = "Score: " + score;
-        if (score % (10 + (growth*10)) == 0)
+        if (score % (growth*hole.pointsNeededToGrowMultipler) == 0)
         {
             UpdateGameState(GameState.holeSize);
             growth++;
         }
     }
-
-    private void selectHoleColor()
-    {
-
-    }
-
     public enum GameState
     {
         isGameActive,
@@ -91,6 +94,7 @@ public class GameManager : MonoBehaviour
         holeSize,
         holeColor,
         playerRank,
-        gameTimer
+        gameTimer,
+        gameOver
     }
 }

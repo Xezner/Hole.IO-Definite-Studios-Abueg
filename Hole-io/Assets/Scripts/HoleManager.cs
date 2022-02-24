@@ -88,7 +88,6 @@ public class HoleManager : MonoBehaviour
     //coroutine for scaling the hloe
     public IEnumerator ScaleHole()
     {
-        Debug.Log("GROWING");
         Vector3 StartScale = transform.localScale;
         Vector3 EndScale = StartScale * 2;
 
