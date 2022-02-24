@@ -23,6 +23,10 @@ public class ObstacleDestroyer : MonoBehaviour
         {
             GameManager.Instance.points = 2;
         }
+        else if(other.gameObject.CompareTag("House"))
+        {
+            GameManager.Instance.points = 1;
+        }
         GameManager.Instance.UpdateGameState(GameManager.GameState.playerScore);
     }
 

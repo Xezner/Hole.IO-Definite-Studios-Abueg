@@ -70,9 +70,10 @@ public class GameManager : MonoBehaviour
     {
         score += points;
         Debug.Log(score);
-        if(score % (10 + growth*5) == 0)
+        if(score % (10 + (growth*10)) == 0)
         {
             UpdateGameState(GameState.holeSize);
+            growth++;
         }
     }
 
