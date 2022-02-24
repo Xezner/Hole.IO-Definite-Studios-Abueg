@@ -4,11 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - HoleCollider
-  - Ground Collider
-  - Mesh Collider (Ground)
-  - Obstacles
   - Ground
+  - Arrow
+  - Color Picker
+  - House
+  - Small Building
+  - Medium Building
+  - Large Building
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - Ground
   - GroundHole
   - Obstacles
-  - Shader
-  - ShaderMask
+  - HoleShader
+  - HoleShaderMask
   - 
   - 
   - 

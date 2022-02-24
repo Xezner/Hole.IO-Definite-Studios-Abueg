@@ -5,12 +5,12 @@ using UnityEngine;
 public class CollisionDetection : MonoBehaviour
 {
     public Collider GroundCollider;
-    public OnChangePosition onChangePosition;
+    public HoleManager onChangePosition;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        //all obstacles should avoid collision on start with the "hole" mesh collider mesh to optimize the game
-
+        //finds all of the obstacle game objects in the game and ignores collision with the mesh collider at the start of
+        // the game and only when is in contact with the hole to optimize the game
         GameObject[] Obstacles = FindObjectsOfType(typeof(GameObject)) as GameObject[];
         foreach (var GameObj in Obstacles)
         {
@@ -21,7 +21,6 @@ public class CollisionDetection : MonoBehaviour
         }
     }
 
-    
     private void OnTriggerEnter(Collider other)
     {
         //in theory the ground mesh collider is the hole itself while the Hole that you see is just a sprite
