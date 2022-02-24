@@ -25,8 +25,17 @@ public class MenuManager : MonoBehaviour
         var myComparer = new CustomComparer();
         listStr.Sort(myComparer);
         listStr.Reverse();
+
         if (listStr.Count > 5) listStr.RemoveRange(5, (listStr.Count - 5));
-        leaderboardsText.text = "Leaderboards\n" + "1. " + listStr[0] + "\n2. " + listStr[1] + "\n3. " + listStr[2] + "\n4. " + listStr[3] +"\n5. " + listStr[4];
+        leaderboardsText.text = "Leaderboards";
+
+        int j = 1;
+        foreach(string hiScore in listStr)
+        {
+            Debug.Log(j + hiScore);
+            leaderboardsText.text = leaderboardsText.text + " \n" + j + ". " + hiScore;
+            j++;
+        }
     }
 
 
