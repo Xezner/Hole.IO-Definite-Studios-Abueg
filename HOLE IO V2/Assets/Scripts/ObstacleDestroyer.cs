@@ -19,6 +19,10 @@ public class ObstacleDestroyer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroy(other.gameObject);
+        if(other.gameObject.CompareTag("Small Building"))
+        {
+            GameManager.Instance.points = 2;
+        }
         GameManager.Instance.UpdateGameState(GameManager.GameState.playerScore);
     }
 

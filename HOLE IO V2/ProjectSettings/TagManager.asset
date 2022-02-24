@@ -7,6 +7,10 @@ TagManager:
   - Ground
   - Arrow
   - Color Picker
+  - House
+  - Small Building
+  - Medium Building
+  - Large Building
   layers:
   - Default
   - TransparentFX

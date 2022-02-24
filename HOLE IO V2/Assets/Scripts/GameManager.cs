@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
     private int score = 0;
-    
+    public int points = 0;
+    private int growth = 0;
     private void Awake()
     {
         Instance = this;
@@ -67,9 +68,9 @@ public class GameManager : MonoBehaviour
 
     private void handlePlayerScore()
     {
-        score++;
+        score += points;
         Debug.Log(score);
-        if(score % 10 == 0)
+        if(score % (10 + growth*5) == 0)
         {
             UpdateGameState(GameState.holeSize);
         }

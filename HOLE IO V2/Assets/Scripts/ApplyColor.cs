@@ -16,8 +16,13 @@ public class ApplyColor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void ApplyOnClick()
+    {
         material.SetColor("Color_54d0debc8fe243ba9038d2f1938b1252", fcp.color);
         indicator.SetColor("Color_32efba62d64f4116b07dd2f84049a09c", fcp.color);
-        
     }
+
 }
