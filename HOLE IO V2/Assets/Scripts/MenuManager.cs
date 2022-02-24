@@ -5,7 +5,7 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     
-    [SerializeField] GameObject fcp;
+    [SerializeField] GameObject fcp = null;
     public bool isSkinsClicked;
     // Start is called before the first frame update
     void Start()

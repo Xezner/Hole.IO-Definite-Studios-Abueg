@@ -15,9 +15,9 @@ public class PlayerController : MonoBehaviour
     float boundaryZ = 0f;
     private bool isMoving;
 
-    [SerializeField] GameObject menu;
+    [SerializeField] GameObject menu = null;
     private bool isMenuOpen;
-    [SerializeField] MenuManager menuManager;
+    [SerializeField] MenuManager menuManager = null;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown("q"))
             {
-                Debug.Log("TRUE");
                 menu.gameObject.SetActive(true);
                 isMenuOpen = true;
             }
