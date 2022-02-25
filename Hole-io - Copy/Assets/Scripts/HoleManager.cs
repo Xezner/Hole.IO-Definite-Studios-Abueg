@@ -13,10 +13,18 @@ public class HoleManager : MonoBehaviour
     public float initialScale = 0f;
     Mesh GeneratedMesh;
 
+    public Ground ground;
+    public Hole hole;
     private void Start()
     {
         //scales the hole collider based off of the radius of the hole
         initialScale = transform.localScale.x / 2f;
+        getGroundScale();
+    }
+
+    private void getGroundScale()
+    {
+        GroundObject.transform.localScale = new Vector3(ground.groundScale, ground.groundScale, ground.groundScale);
     }
     //FixedUpdate is used whenever there is physics involved.
     private void FixedUpdate()
@@ -90,9 +98,8 @@ public class HoleManager : MonoBehaviour
     {
         Vector3 StartScale = transform.localScale;
         Vector3 EndScale = StartScale * 2;
-
         float t = 0;
-        while ( t <= 0.4f)
+        while ( t <= 0.5f)
         {
             t += Time.deltaTime;
             transform.localScale = Vector3.Lerp(StartScale, EndScale, t);

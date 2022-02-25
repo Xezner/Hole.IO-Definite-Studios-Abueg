@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     public static PlayerController Instance;
     public Hole hole;
-    //public CharacterController controller;
+ 
+
+    [GameProperty(10f)]
     public float movementSpeed = 2f;
     public float verticalInput;
     public float horizontalInput;
-    GameObject Ground;
+    [SerializeField] GameObject Ground;
     float boundaryX = 0f;
     float boundaryZ = 0f;
     private bool isMoving;
 
-    [SerializeField] GameObject menu = null;
+    [SerializeField] GameObject pause = null;
     private bool isMenuOpen;
-    [SerializeField] MenuManager menuManager = null;
 
     public TextMeshPro playerName;
 
@@ -37,42 +39,69 @@ public class PlayerController : MonoBehaviour
         SpawnPoint();
         isMoving = false;
         playerName.text = hole.playerName;
-        menu.gameObject.SetActive(false);
+        pause.gameObject.SetActive(false);
         isMenuOpen = false;
 
     }
-    private void MenuScreen()
+    private void PauseScreen()
     {
+        //opens the pause menu if it's not opened
         if (!isMenuOpen)
         {
-            if (Input.GetKeyDown("q"))
+
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                menu.gameObject.SetActive(true);
+                Time.timeScale = 0;
+                pause.gameObject.SetActive(true);
                 isMenuOpen = true;
             }
         }
+        //closes the pause menu if it's opened
         else
         {
-            if (Input.GetKeyDown("q"))
+            //allows to continue the game by playing any key
+            if (Input.anyKeyDown && !(Input.GetKeyDown(KeyCode.Escape)))
             {
-                menu.gameObject.SetActive(false);
-                //menuManager.ClosedByMenu();
+                Debug.Log("HERE");
+                Time.timeScale = 1;
+                pause.gameObject.SetActive(false);
                 isMenuOpen = false;
+            }
+            //goes back to the title screen if escaped is pressed another time
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Time.timeScale = 1;
+                SceneManager.LoadScene("Title Scene", LoadSceneMode.Single);
             }
         }
     }
     private void Update()
     {
-        MenuScreen();
+        PauseScreen();
     }
 
     private void FixedUpdate()
     {
-        PlayerMovement();
+        movementSpeed = hole.moveSpeed;
         MouseMovement();
+        PlayerMovement();
+        /*if (Input.GetMouseButton(0) && ((Input.GetAxis("Horizontal") == 0) && (Input.GetAxis("Vertical") == 0)))
+        {
+            MouseMovement();
+        }
+        else if ( ( Input.GetAxis("Horizontal") != 0 ) || ( Input.GetAxis("Vertical") != 0 ) && !(Input.GetMouseButton(0)) )
+        {
+            PlayerMovement();
+        }
+        else
+        {
+            isMoving = false;
+        }*/
+        
     }
     public void SpawnPoint()
     {
+        //randomizes the spawn point of the player on start
         transform.position = new Vector3(Random.Range(-boundaryX, boundaryX), 0, Random.Range(-boundaryZ, boundaryZ));
     }
     public void MouseMovement()
@@ -88,7 +117,7 @@ public class PlayerController : MonoBehaviour
             direction = new Vector3(direction.x, 0f, direction.z);
             
 
-            // if Keyboard Button is pressed
+            // if mouse Button is pressed
             if (Input.GetMouseButton(0))
             {
                 //change the state to isMoving
@@ -136,6 +165,7 @@ public class PlayerController : MonoBehaviour
 
         //sets boundaries for the hole to move on the horizontal axis but allows to move on the opposite direction
         verticalInput = Input.GetAxis("Vertical");
+
         //makes sure that you can no longer move if you are out of bounds
         if (transform.position.z >= -boundaryZ && verticalInput < 0) ;
         else if (transform.position.z <= boundaryZ && verticalInput > 0) ;
@@ -155,7 +185,7 @@ public class PlayerController : MonoBehaviour
         if (direction != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 100f);
+            if (!isMoving) transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 100f);
         }
     }
 

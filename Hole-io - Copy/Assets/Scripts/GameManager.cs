@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public Hole hole;
     public int score = 0;
     public int points = 0;
-    private int growth = 1;
+    private int growth = 0;
 
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI inputPlayerName;
@@ -30,8 +30,10 @@ public class GameManager : MonoBehaviour
     }
 
     
+    //called when the game is started from the main menu
     public void GameStart()
     {
+        //if there is not input for the player name, defaults the name to ANON
         if (inputPlayerName != null)
         {
             if (inputPlayerName.text.Length <= 1)
@@ -43,16 +45,19 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Main Scene", LoadSceneMode.Single);
     }
 
+    //restarts the game from the play again button
     public void GameRestart()
     {
         SceneManager.LoadScene("Main Scene", LoadSceneMode.Single);
     }
 
+    //called when we go back to the title scene from the main scene
     public void BackToStart()
     {
         SceneManager.LoadScene("Title Scene", LoadSceneMode.Single);
     }
 
+    //closes the application
     public void ExitApplication()
     {
         Application.Quit();
@@ -63,7 +68,7 @@ public class GameManager : MonoBehaviour
     }
 
    
-
+    //updates what state of the game we are in
     public void UpdateGameState(GameState newState)
     {
         State = newState;
@@ -75,8 +80,6 @@ public class GameManager : MonoBehaviour
             case GameState.holeSize:
                 handleHoleSize();
                 break;
-            case GameState.playerRank:
-                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
@@ -85,19 +88,25 @@ public class GameManager : MonoBehaviour
     }
 
 
-
+    // does the animation for the hole size growth
     private void handleHoleSize()
     {
 
         StartCoroutine(holeManager.ScaleHole());
     }
 
+    //adds up the points of the player and displays it on the UI
     private void handlePlayerScore()
     {
         score += points;
         scoreText.text = "Score: " + score;
-        if (score % (growth*hole.pointsNeededToGrowMultipler) == 0)
+        //if the score reaches a certain number updates the size of the hole
+        float pointsToGrow = hole.pointsToGrow;
+        float multiplier = growth * hole.pointsToGrowMultiplier;
+        if (score >= (pointsToGrow + pointsToGrow*multiplier*growth))
         {
+            Debug.Log(score);
+            Debug.Log("GROWING");
             UpdateGameState(GameState.holeSize);
             growth++;
         }
