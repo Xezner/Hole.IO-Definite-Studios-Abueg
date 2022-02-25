@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public Hole hole;
     public int score = 0;
     public int points = 0;
-    private int growth = 1;
+    private int growth = 0;
 
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI inputPlayerName;
@@ -101,8 +101,12 @@ public class GameManager : MonoBehaviour
         score += points;
         scoreText.text = "Score: " + score;
         //if the score reaches a certain number updates the size of the hole
-        if (score % (growth*hole.pointsNeededToGrowMultipler) == 0)
+        float pointsToGrow = hole.pointsToGrow;
+        float multiplier = growth * hole.pointsToGrowMultiplier;
+        if (score >= (pointsToGrow + pointsToGrow*multiplier*growth))
         {
+            Debug.Log(score);
+            Debug.Log("GROWING");
             UpdateGameState(GameState.holeSize);
             growth++;
         }

@@ -6,6 +6,8 @@ public class ObstacleDestroyer : MonoBehaviour
 {
     public Obstacles house;
     public Obstacles smallBuilding;
+    public Obstacles largeBuilding;
+    public Obstacles mediumBuilding;
     public static ObstacleDestroyer Instance;
     [SerializeField] private GameObject ground;
 
@@ -22,13 +24,19 @@ public class ObstacleDestroyer : MonoBehaviour
         Destroy(other.gameObject);
         if(other.gameObject.CompareTag(smallBuilding.obstacleName))
         {
-            Debug.Log(smallBuilding.pointsGiven);
             GameManager.Instance.points = smallBuilding.pointsGiven;
         }
         else if(other.gameObject.CompareTag(house.obstacleName))
         {
-            Debug.Log(house.pointsGiven);
             GameManager.Instance.points = house.pointsGiven;
+        }
+        else if (other.gameObject.CompareTag(mediumBuilding.obstacleName))
+        {
+            GameManager.Instance.points = mediumBuilding.pointsGiven;
+        }
+        else if (other.gameObject.CompareTag(largeBuilding.obstacleName))
+        {
+            GameManager.Instance.points = largeBuilding.pointsGiven;
         }
         GameManager.Instance.UpdateGameState(GameManager.GameState.playerScore);
     }
