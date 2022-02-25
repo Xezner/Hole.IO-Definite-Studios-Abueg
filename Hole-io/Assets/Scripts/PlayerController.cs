@@ -83,8 +83,21 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         movementSpeed = hole.moveSpeed;
-        PlayerMovement();
         MouseMovement();
+        PlayerMovement();
+        /*if (Input.GetMouseButton(0) && ((Input.GetAxis("Horizontal") == 0) && (Input.GetAxis("Vertical") == 0)))
+        {
+            MouseMovement();
+        }
+        else if ( ( Input.GetAxis("Horizontal") != 0 ) || ( Input.GetAxis("Vertical") != 0 ) && !(Input.GetMouseButton(0)) )
+        {
+            PlayerMovement();
+        }
+        else
+        {
+            isMoving = false;
+        }*/
+        
     }
     public void SpawnPoint()
     {
@@ -104,7 +117,7 @@ public class PlayerController : MonoBehaviour
             direction = new Vector3(direction.x, 0f, direction.z);
             
 
-            // if Keyboard Button is pressed
+            // if mouse Button is pressed
             if (Input.GetMouseButton(0))
             {
                 //change the state to isMoving
@@ -152,6 +165,7 @@ public class PlayerController : MonoBehaviour
 
         //sets boundaries for the hole to move on the horizontal axis but allows to move on the opposite direction
         verticalInput = Input.GetAxis("Vertical");
+
         //makes sure that you can no longer move if you are out of bounds
         if (transform.position.z >= -boundaryZ && verticalInput < 0) ;
         else if (transform.position.z <= boundaryZ && verticalInput > 0) ;
@@ -171,7 +185,7 @@ public class PlayerController : MonoBehaviour
         if (direction != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 100f);
+            if (!isMoving) transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 100f);
         }
     }
 
