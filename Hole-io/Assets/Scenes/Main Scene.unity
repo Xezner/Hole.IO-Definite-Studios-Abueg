@@ -2692,6 +2692,7 @@ MonoBehaviour:
   GeneratedMeshCollider: {fileID: 98692871}
   GroundObject: {fileID: 2099763842}
   initialScale: 0.5
+  ground: {fileID: 11400000, guid: 032e9982d0ce3d54883945c6452f7f34, type: 2}
 --- !u!135 &890261566
 SphereCollider:
   m_ObjectHideFlags: 0

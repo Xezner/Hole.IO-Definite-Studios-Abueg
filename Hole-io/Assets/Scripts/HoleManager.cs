@@ -13,10 +13,17 @@ public class HoleManager : MonoBehaviour
     public float initialScale = 0f;
     Mesh GeneratedMesh;
 
+    public Ground ground;
     private void Start()
     {
         //scales the hole collider based off of the radius of the hole
         initialScale = transform.localScale.x / 2f;
+        getGroundScale();
+    }
+
+    private void getGroundScale()
+    {
+        GroundObject.transform.localScale = new Vector3(ground.groundScale, ground.groundScale, ground.groundScale);
     }
     //FixedUpdate is used whenever there is physics involved.
     private void FixedUpdate()
