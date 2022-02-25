@@ -14,6 +14,7 @@ public class HoleManager : MonoBehaviour
     Mesh GeneratedMesh;
 
     public Ground ground;
+    public Hole hole;
     private void Start()
     {
         //scales the hole collider based off of the radius of the hole

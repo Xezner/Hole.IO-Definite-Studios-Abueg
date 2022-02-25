@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace43b700d7b9e34db60cbb0c7b27d0b, type: 3}
   m_Name: GameManagement
   m_EditorClassIdentifier: 
-  timeToEnd: 5
+  timeToEnd: 60

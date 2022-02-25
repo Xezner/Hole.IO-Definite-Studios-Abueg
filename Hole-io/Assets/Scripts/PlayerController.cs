@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     public static PlayerController Instance;
     public Hole hole;
-    //public CharacterController controller;
+ 
+
+    [GameProperty(10f)]
     public float movementSpeed = 2f;
     public float verticalInput;
     public float horizontalInput;
-    GameObject Ground;
+    [SerializeField] GameObject Ground;
     float boundaryX = 0f;
     float boundaryZ = 0f;
     private bool isMoving;
