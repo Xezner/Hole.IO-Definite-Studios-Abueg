@@ -91,7 +91,6 @@ public class GameManager : MonoBehaviour
     // does the animation for the hole size growth
     private void handleHoleSize()
     {
-
         StartCoroutine(holeManager.ScaleHole());
     }
 
@@ -105,8 +104,6 @@ public class GameManager : MonoBehaviour
         float multiplier = growth * hole.pointsToGrowMultiplier;
         if (score >= (pointsToGrow + pointsToGrow*multiplier*growth))
         {
-            Debug.Log(score);
-            Debug.Log("GROWING");
             UpdateGameState(GameState.holeSize);
             growth++;
         }
