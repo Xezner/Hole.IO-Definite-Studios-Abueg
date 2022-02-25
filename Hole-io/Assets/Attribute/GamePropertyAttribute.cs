@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GamePropertyAttribute : PropertyAttribute
 {
-    public float holeScale;
+    public float movementSpeed;
 
-    public GamePropertyAttribute(float holeScale)
+    public GamePropertyAttribute(float movementSpeed)
     {
-        this.holeScale = holeScale;
+        this.movementSpeed = movementSpeed;
     }
 }

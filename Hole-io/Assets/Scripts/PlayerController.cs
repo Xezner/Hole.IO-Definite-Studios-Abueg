@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        movementSpeed = hole.moveSpeed;
         PlayerMovement();
         MouseMovement();
     }
