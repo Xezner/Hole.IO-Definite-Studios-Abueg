@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,9 +19,8 @@ public class PlayerController : MonoBehaviour
     float boundaryZ = 0f;
     private bool isMoving;
 
-    [SerializeField] GameObject menu = null;
+    [SerializeField] GameObject pause = null;
     private bool isMenuOpen;
-    [SerializeField] MenuManager menuManager = null;
 
     public TextMeshPro playerName;
 
@@ -37,33 +37,45 @@ public class PlayerController : MonoBehaviour
         SpawnPoint();
         isMoving = false;
         playerName.text = hole.playerName;
-        menu.gameObject.SetActive(false);
+        pause.gameObject.SetActive(false);
         isMenuOpen = false;
 
     }
-    private void MenuScreen()
+    private void PauseScreen()
     {
+        //opens the pause menu if it's not opened
         if (!isMenuOpen)
         {
-            if (Input.GetKeyDown("q"))
+
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                menu.gameObject.SetActive(true);
+                Time.timeScale = 0;
+                pause.gameObject.SetActive(true);
                 isMenuOpen = true;
             }
         }
+        //closes the pause menu if it's opened
         else
         {
-            if (Input.GetKeyDown("q"))
+            //allows to continue the game by playing any key
+            if (Input.anyKeyDown && !(Input.GetKeyDown(KeyCode.Escape)))
             {
-                menu.gameObject.SetActive(false);
-                //menuManager.ClosedByMenu();
+                Debug.Log("HERE");
+                Time.timeScale = 1;
+                pause.gameObject.SetActive(false);
                 isMenuOpen = false;
+            }
+            //goes back to the title screen if escaped is pressed another time
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Time.timeScale = 1;
+                SceneManager.LoadScene("Title Scene", LoadSceneMode.Single);
             }
         }
     }
     private void Update()
     {
-        MenuScreen();
+        PauseScreen();
     }
 
     private void FixedUpdate()
@@ -73,6 +85,7 @@ public class PlayerController : MonoBehaviour
     }
     public void SpawnPoint()
     {
+        //randomizes the spawn point of the player on start
         transform.position = new Vector3(Random.Range(-boundaryX, boundaryX), 0, Random.Range(-boundaryZ, boundaryZ));
     }
     public void MouseMovement()

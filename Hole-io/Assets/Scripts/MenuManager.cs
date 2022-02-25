@@ -19,6 +19,7 @@ public class MenuManager : MonoBehaviour
         isSkinsClicked = false;
     }
 
+    //gets the top scores list and sets it on our leaderboards menu
     private void setTopFiveScores()
     {
         listStr = PlayerPrefsExtra.GetList<string>("highScoreName");
@@ -32,7 +33,6 @@ public class MenuManager : MonoBehaviour
         int j = 1;
         foreach(string hiScore in listStr)
         {
-            Debug.Log(j + hiScore);
             leaderboardsText.text = leaderboardsText.text + " \n" + j + ". " + hiScore;
             j++;
         }
@@ -41,6 +41,7 @@ public class MenuManager : MonoBehaviour
 
     public void SkinsButtonOnClick()
     {
+        //button for the color picker that we have created
         if (isSkinsClicked)
         {
             fcp.gameObject.SetActive(false);
@@ -53,10 +54,4 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void ClosedByMenu()
-    {
-        fcp.gameObject.SetActive(false);
-        isSkinsClicked = false;
-    }
-    
 }
