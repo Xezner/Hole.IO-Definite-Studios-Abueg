@@ -41,14 +41,14 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
         pause.gameObject.SetActive(false);
         isMenuOpen = false;
-        layerMask = 1 << 2;
+
     }
     private void PauseScreen()
     {
         //opens the pause menu if it's not opened
         if (!isMenuOpen)
         {
-
+            //pauses game when you pressed escape
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Time.timeScale = 0;
@@ -86,19 +86,7 @@ public class PlayerController : MonoBehaviour
         movementSpeed = hole.moveSpeed;
         MouseMovement();
         PlayerMovement();
-        /*if (Input.GetMouseButton(0) && ((Input.GetAxis("Horizontal") == 0) && (Input.GetAxis("Vertical") == 0)))
-        {
-            MouseMovement();
-        }
-        else if ( ( Input.GetAxis("Horizontal") != 0 ) || ( Input.GetAxis("Vertical") != 0 ) && !(Input.GetMouseButton(0)) )
-        {
-            PlayerMovement();
-        }
-        else
-        {
-            isMoving = false;
-        }*/
-        
+
     }
     public void SpawnPoint()
     {
