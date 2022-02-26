@@ -1,31 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
-public class CreateNewGameData : EditorWindow
+public class CreateNewObstacle : EditorWindow
 {
     private SerializedObject serializedObject;
     private SerializedProperty serializedProperty;
 
-    protected HolePlayer[] holes;
-    public HolePlayer newHole;
+    protected Obstacles[] obs;
+    public Obstacles newObs;
     // Start is called before the first frame update
     private void OnGUI()
     {
 
-        serializedObject = new SerializedObject(newHole);
+        serializedObject = new SerializedObject(newObs);
         serializedProperty = serializedObject.GetIterator();
         serializedProperty.NextVisible(true);
         DrawProperties(serializedProperty);
         if (GUILayout.Button("save"))
         {
-            holes = GetAllInstances<HolePlayer>();
-            if (newHole.playerName == null)
+            obs = GetAllInstances<Obstacles>();
+            if (newObs.obstacleName == null)
             {
-                newHole.playerName = "Hole" + (holes.Length + 1);
+                newObs.obstacleName = "Building" + (obs.Length + 1);
             }
-            AssetDatabase.CreateAsset(newHole, "Assets/Scriptable Object/Hole" + (holes.Length + 1) + ".asset");
+            AssetDatabase.CreateAsset(newObs, "Assets/Scriptable Object/" + newObs.obstacleName + ".asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             Close();
@@ -45,7 +45,7 @@ public class CreateNewGameData : EditorWindow
     }
 
 
-    public static T[] GetAllInstances<T>() where T : HolePlayer
+    public static T[] GetAllInstances<T>() where T : Obstacles
     {
         string[] guids = AssetDatabase.FindAssets("t:" + typeof(T).Name);
         T[] a = new T[guids.Length];

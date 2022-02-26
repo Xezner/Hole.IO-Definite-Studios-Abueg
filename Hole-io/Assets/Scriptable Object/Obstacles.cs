@@ -7,5 +7,5 @@ public class Obstacles : ScriptableObject
 {
     public string obstacleName;
     public int pointsGiven;
-
+    public GameObject obstaclePrefab;
 }

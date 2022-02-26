@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEditor;
 public class GetAllHoles : MonoBehaviour
 {
-    private Hole[] holes;
+    private HolePlayer[] holes;
     // Start is called before the first frame update
     void Start()
     {
-        holes = GetAllInstances<Hole>();
+        holes = GetAllInstances<HolePlayer>();
     }
 
-    public static T[] GetAllInstances<T>() where T : Hole
+    public static T[] GetAllInstances<T>() where T : HolePlayer
     {
         string[] guids = AssetDatabase.FindAssets("t:" + typeof(T).Name);
         T[] a = new T[guids.Length];

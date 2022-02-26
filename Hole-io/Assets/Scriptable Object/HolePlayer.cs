@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Hole")]
-public class Hole : ScriptableObject
+public class HolePlayer : ScriptableObject
 {
     public string playerName;
     public float moveSpeed;

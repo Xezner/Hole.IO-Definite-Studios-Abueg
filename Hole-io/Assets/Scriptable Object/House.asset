@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleName: House
   pointsGiven: 1
+  obstaclePrefab: {fileID: 612123444436403302, guid: 716e5e62fe8e9de40a6f006574d1a55e, type: 3}

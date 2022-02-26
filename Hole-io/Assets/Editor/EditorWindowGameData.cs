@@ -7,7 +7,8 @@ public class EditorWindowGameData : EditorWindow
     protected SerializedObject serializedObject;
     protected SerializedProperty serializedProperty;
 
-    protected Hole[] hole;
+    protected HolePlayer[] hole;
+    protected Obstacles[] obstacles;
     protected string selectedPropertyPach;
     protected string selectedProperty;
 
@@ -21,27 +22,51 @@ public class EditorWindowGameData : EditorWindow
 
     private void OnGUI()
     {
-        hole = GetAllInstances<Hole>();
-        serializedObject = new SerializedObject(hole[0]);
+        hole = GetAllInstancesHole<HolePlayer>();
+        obstacles = GetAllInstancesObstacles<Obstacles>();
         //EditorGUILayout.LabelField("Player Data");
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(150), GUILayout.ExpandHeight(true));
-        DrawSliderBar(hole);
+        DrawSliderBarHole(hole);
+        DrawSliderBarObstacles(obstacles);
         EditorGUILayout.EndVertical();
         EditorGUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
 
-        for (int i = 0; i < hole.Length; i++)
+        if (selectedProperty != null)
         {
-            serializedObject = new SerializedObject(hole[i]);
-            serializedProperty = serializedObject.GetIterator();
-            serializedProperty.NextVisible(true);
-            DrawProperties(serializedProperty);
+
+            for (int i = 0; i < hole.Length; i++)
+            {
+                if ("Player Data" == selectedProperty)
+                {
+                    serializedObject = new SerializedObject(hole[i]);
+                    serializedProperty = serializedObject.GetIterator();
+                    serializedProperty.NextVisible(true);
+                    DrawProperties(serializedProperty);
+                    Apply();
+                }
+            }
+            for (int i = 0; i < obstacles.Length; i++)
+            {
+                if (obstacles[i].obstacleName == selectedProperty)
+                {
+                    serializedObject = new SerializedObject(obstacles[i]);
+                    serializedProperty = serializedObject.GetIterator();
+                    serializedProperty.NextVisible(true);
+                    DrawProperties(serializedProperty);
+                    Apply();
+                }
+            }
+        }
+        else
+        {
+            EditorGUILayout.LabelField("Select an item from the list.");
         }
 
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
 
-        Apply();
+        
     }
 
     protected void DrawProperties(SerializedProperty p)
@@ -53,7 +78,20 @@ public class EditorWindowGameData : EditorWindow
     }
 
     //gets all instances of hole to add to the editor window
-    public static T[] GetAllInstances<T>() where T : Hole
+    public static T[] GetAllInstancesHole<T>() where T : HolePlayer
+    {
+        string[] guids = AssetDatabase.FindAssets("t:" + typeof(T).Name);
+        T[] a = new T[guids.Length];
+        for (int i = 0; i < guids.Length; i++)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guids[i]);
+            a[i] = AssetDatabase.LoadAssetAtPath<T>(path);
+        }
+
+        return a;
+    }
+
+    public static T[] GetAllInstancesObstacles<T>() where T : Obstacles
     {
         string[] guids = AssetDatabase.FindAssets("t:" + typeof(T).Name);
         T[] a = new T[guids.Length];
@@ -67,9 +105,9 @@ public class EditorWindowGameData : EditorWindow
     }
 
 
-    protected void DrawSliderBar(Hole[] allHoles)
+    protected void DrawSliderBarHole(HolePlayer[] allHoles)
     {
-        foreach (Hole h in allHoles)
+        foreach (HolePlayer h in allHoles)
         {
             if (GUILayout.Button("Player Data"))
             {
@@ -81,12 +119,28 @@ public class EditorWindowGameData : EditorWindow
         {
             selectedProperty = selectedPropertyPach;
         }
+    }
 
-        if (GUILayout.Button("New Hole"))
+    protected void DrawSliderBarObstacles(Obstacles[] allObstacles)
+    {
+        foreach (Obstacles obs in allObstacles)
         {
-            Hole newHole = ScriptableObject.CreateInstance<Hole>();
-            CreateNewGameData newHoleWindow = GetWindow<CreateNewGameData>("New Hole");
-            newHoleWindow.newHole = newHole ;
+            if (GUILayout.Button(obs.obstacleName))
+            {
+                selectedPropertyPach = obs.obstacleName;
+            }
+        }
+
+        if (!string.IsNullOrEmpty(selectedPropertyPach))
+        {
+            selectedProperty = selectedPropertyPach;
+        }
+
+        if (GUILayout.Button("New Obstacle"))
+        {
+            Obstacles newObs = ScriptableObject.CreateInstance<Obstacles>();
+            CreateNewObstacle newObsWindow = GetWindow<CreateNewObstacle>("New Obstacle");
+            newObsWindow.newObs = newObs;
 
         }
     }

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleName: Small Building
   pointsGiven: 2
+  obstaclePrefab: {fileID: 4531904671460813515, guid: cebe159d41a4e7041b58ec1f9ca1565e, type: 3}

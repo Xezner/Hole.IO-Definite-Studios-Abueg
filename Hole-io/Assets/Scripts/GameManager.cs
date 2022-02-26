@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
-    public Hole hole;
+    public HolePlayer hole;
     public int score = 0;
     public int points = 0;
     private int growth = 0;

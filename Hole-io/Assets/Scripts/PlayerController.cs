@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
 
     public static PlayerController Instance;
-    public Hole hole; 
+    public HolePlayer hole; 
     public float movementSpeed = 2f;
     public float verticalInput;
     public float horizontalInput;

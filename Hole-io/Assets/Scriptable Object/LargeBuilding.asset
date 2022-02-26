@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: LargeBuilding
   m_EditorClassIdentifier: 
   obstacleName: Large Building
-  pointsGiven: 10
+  pointsGiven: 20
+  obstaclePrefab: {fileID: 2087504903778923793, guid: 9baacd424537af542ba1edc7e7e588c5, type: 3}

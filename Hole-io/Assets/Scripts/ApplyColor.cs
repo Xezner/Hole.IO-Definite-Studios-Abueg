@@ -5,7 +5,7 @@ using UnityEngine;
 public class ApplyColor : MonoBehaviour
 {
     public FlexibleColorPicker fcp;
-    public Hole hole;
+    public HolePlayer hole;
     // Start is called before the first frame update
     void Start()
     {

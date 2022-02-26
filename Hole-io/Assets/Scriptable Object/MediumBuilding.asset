@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleName: Medium Building
   pointsGiven: 5
+  obstaclePrefab: {fileID: 6056303057564594037, guid: 378ffe6a38db0b54cae49685fc5235ae, type: 3}
