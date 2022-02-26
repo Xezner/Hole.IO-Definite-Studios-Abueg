@@ -44,6 +44,6 @@ public class ObstacleDestroyer : MonoBehaviour
     //rescales the "Dead Zone" to the size of our ground
     private void ScaleCollider()
     {
-        transform.localScale = new Vector3(ground.transform.localScale.x, 1f, ground.transform.localScale.z);
+        transform.localScale = new Vector3(ground.transform.localScale.x, 1f, ground.transform.localScale.y);
     }
 }
