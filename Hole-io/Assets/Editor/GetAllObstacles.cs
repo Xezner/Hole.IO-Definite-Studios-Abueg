@@ -9,7 +9,7 @@ public class GetAllObstacles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+         
     }
     public static T[] GetAllInstancesObstacles<T>() where T : Obstacles
     {

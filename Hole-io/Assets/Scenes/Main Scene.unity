@@ -9265,7 +9265,7 @@ MonoBehaviour:
   GroundObject: {fileID: 2099763842}
   initialScale: 0.5
   ground: {fileID: 11400000, guid: 032e9982d0ce3d54883945c6452f7f34, type: 2}
-  hole: {fileID: 0}
+  hole: {fileID: 11400000, guid: 9dcbc825a94176f49a4419e6b5c83c40, type: 2}
 --- !u!135 &890261566
 SphereCollider:
   m_ObjectHideFlags: 0

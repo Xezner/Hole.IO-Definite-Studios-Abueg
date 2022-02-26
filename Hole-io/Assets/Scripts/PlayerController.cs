@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [GameProperty(10f)]
 
-
+    public LayerMask PlayerLayerMask;
+    public int layerMask;
     public static PlayerController Instance;
     public HolePlayer hole; 
     public float movementSpeed = 2f;
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
         pause.gameObject.SetActive(false);
         isMenuOpen = false;
-
+        layerMask = 1 << 2;
     }
     private void PauseScreen()
     {
@@ -108,7 +109,7 @@ public class PlayerController : MonoBehaviour
     {
         //created a raycast inorder to get the position of the mouse relative to the worldpoint
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit))
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 100, PlayerLayerMask))
         {
             Vector3 rayHit = raycastHit.point;
             // subtracting the ray hit from the hole's position would tell us the direction of where our mouse is
