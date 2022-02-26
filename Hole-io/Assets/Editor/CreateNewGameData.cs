@@ -13,7 +13,6 @@ public class CreateNewGameData : EditorWindow
     // Start is called before the first frame update
     private void OnGUI()
     {
-
         serializedObject = new SerializedObject(newHole);
         serializedProperty = serializedObject.GetIterator();
         serializedProperty.NextVisible(true);
