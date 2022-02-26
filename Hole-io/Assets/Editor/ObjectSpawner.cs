@@ -11,8 +11,8 @@ public class ObjectSpawner : EditorWindow
     protected GameObject objectToSpawn;
     protected float minPosX;
     protected float maxPosX;
-    protected float minPosZ;
-    protected float maxPosZ;
+    protected float minPosY;
+    protected float maxPosY;
 
     [MenuItem("Tools/Object Spawner")]
     public static void ShowWindow()
@@ -52,12 +52,12 @@ public class ObjectSpawner : EditorWindow
             float posX = GameObject.Find("Ground").transform.localScale.x/2f - objectToSpawn.transform.localScale.x/2f;
             minPosX = -posX;
             maxPosX = posX;
-            float posZ = GameObject.Find("Ground").transform.localScale.z / 2f - objectToSpawn.transform.localScale.x / 2f;
-            minPosZ = -posZ;
-            maxPosZ = posZ;
+            float posZ = GameObject.Find("Ground").transform.localScale.y / 2f - objectToSpawn.transform.localScale.y / 2f;
+            minPosY = -posZ;
+            maxPosY = posZ;
             
             Vector3 halfExtents = (objectToSpawn.transform.localScale / 2f);
-            Vector3 spawnPos = new Vector3(UnityEngine.Random.Range(minPosX, maxPosX), 0.4f  , UnityEngine.Random.Range(minPosZ, maxPosZ));            
+            Vector3 spawnPos = new Vector3(UnityEngine.Random.Range(minPosX, maxPosX), 0.5f  , UnityEngine.Random.Range(minPosY, maxPosY));            
             Quaternion yRotate =  Quaternion.AngleAxis(UnityEngine.Random.Range(0, 180), Vector3.up);
 
         /*Collider[] hitColliders = Physics.OverlapBox(spawnPos, ((objectToSpawn.transform.localScale)*1.1f), yRotate);
@@ -83,18 +83,17 @@ public class ObjectSpawner : EditorWindow
         Debug.Log("Half: " + halfExtents);
         Debug.Log("Spawn.Y: " + spawnPos.y);
         Debug.Log("Spawn point: " + spawnPos);
-        if (Physics.CheckBox(spawnPos, halfExtents , yRotate))
+        Debug.Log("y"+yRotate);
+        if (!Physics.CheckBox(spawnPos, halfExtents , yRotate))
         {
-            Debug.Log((Physics.OverlapBox(spawnPos, halfExtents, yRotate))[0]);
+            Debug.Log("y"+yRotate);
             GameObject newObject = Instantiate(objectToSpawn, spawnPos, yRotate, GameObject.Find("Obstacles").transform);
-            Debug.Log("DESTROY");
+            newObject.name = objectName + objectID;
+            objectID++;
         }
         else
         {
-            //GameObject newObject = Instantiate(objectToSpawn, spawnPos, yRotate, GameObject.Find("Obstacles").transform);
-            Debug.Log("SUCCESS");
-            //newObject.name = objectName + objectID;
-            objectID++;
+            Debug.LogError("Destroyed Object");
         }  
 
 

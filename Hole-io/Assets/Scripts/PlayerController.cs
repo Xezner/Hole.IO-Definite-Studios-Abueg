@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput;
     [SerializeField] GameObject Ground;
     float boundaryX = 0f;
-    float boundaryZ = 0f;
+    float boundaryY = 0f;
     private bool isMoving;
 
     [SerializeField] GameObject pause = null;
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         Ground = GameObject.FindGameObjectWithTag("Ground");
         boundaryX = Ground.transform.localScale.x / 2;
-        boundaryZ = Ground.transform.localScale.z / 2;
+        boundaryY = Ground.transform.localScale.y / 2;
         SpawnPoint();
         isMoving = false;
         pause.gameObject.SetActive(false);
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
     public void SpawnPoint()
     {
         //randomizes the spawn point of the player on start
-        transform.position = new Vector3(Random.Range(-boundaryX, boundaryX), 0, Random.Range(-boundaryZ, boundaryZ));
+        transform.position = new Vector3(Random.Range(-boundaryX, boundaryX), 0, Random.Range(-boundaryY, boundaryY));
     }
     public void MouseMovement()
     {
@@ -167,8 +167,8 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
 
         //makes sure that you can no longer move if you are out of bounds
-        if (transform.position.z >= -boundaryZ && verticalInput < 0) ;
-        else if (transform.position.z <= boundaryZ && verticalInput > 0) ;
+        if (transform.position.z >= -boundaryY && verticalInput < 0) ;
+        else if (transform.position.z <= boundaryY && verticalInput > 0) ;
         else verticalInput = 0f;
 
         //saves our horizontal and vertical input in a vector3 called direction        

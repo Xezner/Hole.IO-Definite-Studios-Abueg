@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb7b2902b4296b438f3dd32b986a199, type: 3}
   m_Name: Ground Scale
   m_EditorClassIdentifier: 
-  groundScale: 30
+  groundScale: 25
