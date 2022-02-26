@@ -9319,6 +9319,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 963194227}
+  PlayerLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  layerMask: 0
   hole: {fileID: 11400000, guid: 9dcbc825a94176f49a4419e6b5c83c40, type: 2}
   movementSpeed: 5
   verticalInput: 0
