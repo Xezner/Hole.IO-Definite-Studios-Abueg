@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: ANON
   moveSpeed: 5
-  pointsToGrow: 10
+  pointsToGrow: 20
   pointsToGrowMultiplier: 1.5
   holeMaterial: {fileID: 2100000, guid: 8402be62a0284534db18b2e4e55b9429, type: 2}
   arrowMaterial: {fileID: 2100000, guid: 0a23920f9ba39294e9070b811a188184, type: 2}

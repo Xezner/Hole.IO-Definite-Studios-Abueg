@@ -7,8 +7,9 @@ public class Hole : ScriptableObject
 {
     public string playerName;
     public float moveSpeed;
-    public float pointsToGrow;
+    public float pointsToGrow;  
     public float pointsToGrowMultiplier;
     public Material holeMaterial;
     public Material arrowMaterial;
+
 }

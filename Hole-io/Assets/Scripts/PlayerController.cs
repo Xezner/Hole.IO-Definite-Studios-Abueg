@@ -8,11 +8,11 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
-    public static PlayerController Instance;
-    public Hole hole;
- 
-
     [GameProperty(10f)]
+
+
+    public static PlayerController Instance;
+    public Hole hole; 
     public float movementSpeed = 2f;
     public float verticalInput;
     public float horizontalInput;
