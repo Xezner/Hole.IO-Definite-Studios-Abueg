@@ -17,6 +17,7 @@ public class SaveSystem : MonoBehaviour
     void Start()
     {
         //gets the current list of highscores and names
+        
         listStr = PlayerPrefsExtra.GetList<string>("highScoreName");
     }
 
