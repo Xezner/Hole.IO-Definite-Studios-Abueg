@@ -10,6 +10,7 @@ public class EditorWindowGameData : EditorWindow
     protected HolePlayer[] hole;
     protected Obstacles[] obstacles;
     protected Ground[] ground;
+    protected GameManagement[] gm;
     protected string selectedPropertyPach;
     protected string selectedProperty;
 
@@ -27,7 +28,7 @@ public class EditorWindowGameData : EditorWindow
         hole = GetAllInstancesHole<HolePlayer>();
         obstacles = GetAllInstancesObstacles<Obstacles>();
         ground = GetAllInstancesGround<Ground>();
-
+        gm = GetAllInstancesGM<GameManagement>();
 
         EditorGUILayout.BeginHorizontal();
         //GUI for the sliders with a max width of 150
@@ -37,6 +38,7 @@ public class EditorWindowGameData : EditorWindow
         DrawSliderBarHole(hole);
         DrawSliderBarObstacles(obstacles);
         DrawSliderBarGround(ground);
+        DrawSliderBarGM(gm);
         EditorGUILayout.EndVertical();
         EditorGUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
 
@@ -72,6 +74,18 @@ public class EditorWindowGameData : EditorWindow
                 if ("Ground Scale" == selectedProperty)
                 {
                     serializedObject = new SerializedObject(ground[i]);
+                    serializedProperty = serializedObject.GetIterator();
+                    serializedProperty.NextVisible(true);
+                    DrawProperties(serializedProperty);
+                    Apply();
+                }
+            }
+            for (int i = 0; i < gm.Length; i++)
+            {
+                //checks if the tab being selected is the player data, and saves any changes made to the properties of this serializedObject
+                if ("Countdown Timer" == selectedProperty)
+                {
+                    serializedObject = new SerializedObject(gm[i]);
                     serializedProperty = serializedObject.GetIterator();
                     serializedProperty.NextVisible(true);
                     DrawProperties(serializedProperty);
@@ -148,9 +162,22 @@ public class EditorWindowGameData : EditorWindow
 
         return a;
     }
+    public static T[] GetAllInstancesGM<T>() where T : GameManagement
+    {
+        //basically find game assets of type Ground with the name it needs
+        string[] guids = AssetDatabase.FindAssets("t:" + typeof(T).Name);
+        T[] a = new T[guids.Length];
+        for (int i = 0; i < guids.Length; i++)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guids[i]);
+            a[i] = AssetDatabase.LoadAssetAtPath<T>(path);
+        }
+
+        return a;
+    }
 
 
-    
+
     protected void DrawSliderBarHole(HolePlayer[] allHoles)
     {
         //sets the name of the button to the name of the property
@@ -206,6 +233,19 @@ public class EditorWindowGameData : EditorWindow
         }
     }
 
+    protected void DrawSliderBarGM(GameManagement[] gameMgmt)
+    {
+        //sets the name of the button to the name of the property
+        if (GUILayout.Button("Countdown Timer"))
+        {
+            selectedPropertyPach = "Countdown Timer";
+        }
+
+        if (!string.IsNullOrEmpty(selectedPropertyPach))
+        {
+            selectedProperty = selectedPropertyPach;
+        }
+    }
     protected void Apply()
     {
         serializedObject.ApplyModifiedProperties();
