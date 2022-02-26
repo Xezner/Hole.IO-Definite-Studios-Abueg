@@ -8,6 +8,9 @@ public class EditorWindowGameData : EditorWindow
     protected SerializedProperty serializedProperty;
 
     protected Hole[] hole;
+    protected string selectedPropertyPach;
+    protected string selectedProperty;
+
     //creates a new menu item called Tools and window called game data
     [MenuItem("Tools/GameData")]
     protected static void ShowWindow()
@@ -20,7 +23,11 @@ public class EditorWindowGameData : EditorWindow
     {
         hole = GetAllInstances<Hole>();
         serializedObject = new SerializedObject(hole[0]);
-        EditorGUILayout.LabelField("Player Data");
+        //EditorGUILayout.LabelField("Player Data");
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(150), GUILayout.ExpandHeight(true));
+        DrawSliderBar(hole);
+        EditorGUILayout.EndVertical();
         EditorGUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
 
         for (int i = 0; i < hole.Length; i++)
@@ -32,6 +39,7 @@ public class EditorWindowGameData : EditorWindow
         }
 
         EditorGUILayout.EndVertical();
+        EditorGUILayout.EndHorizontal();
 
         Apply();
     }
@@ -56,6 +64,31 @@ public class EditorWindowGameData : EditorWindow
         }
 
         return a;
+    }
+
+
+    protected void DrawSliderBar(Hole[] allHoles)
+    {
+        foreach (Hole h in allHoles)
+        {
+            if (GUILayout.Button("Player Data"))
+            {
+                selectedPropertyPach = "Player Data";
+            }
+        }
+
+        if (!string.IsNullOrEmpty(selectedPropertyPach))
+        {
+            selectedProperty = selectedPropertyPach;
+        }
+
+        if (GUILayout.Button("New Hole"))
+        {
+            Hole newHole = ScriptableObject.CreateInstance<Hole>();
+            CreateNewGameData newHoleWindow = GetWindow<CreateNewGameData>("New Hole");
+            newHoleWindow.newHole = newHole ;
+
+        }
     }
 
     protected void Apply()
