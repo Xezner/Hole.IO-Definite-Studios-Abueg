@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
         boundaryZ = Ground.transform.localScale.z / 2;
         SpawnPoint();
         isMoving = false;
-        playerName.text = hole.playerName;
         pause.gameObject.SetActive(false);
         isMenuOpen = false;
 
@@ -77,6 +76,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        playerName.text = hole.playerName;
         PauseScreen();
     }
 

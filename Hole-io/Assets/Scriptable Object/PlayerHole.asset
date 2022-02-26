@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25249794e1cbe474296b9c9519792ebb, type: 3}
   m_Name: PlayerHole
   m_EditorClassIdentifier: 
-  playerName: Renzsdsd
+  playerName: ANON
   moveSpeed: 5
   pointsToGrow: 20
   pointsToGrowMultiplier: 1.5
