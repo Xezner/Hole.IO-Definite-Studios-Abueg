@@ -18,7 +18,7 @@ public class CreateNewObstacle : EditorWindow
         serializedProperty = serializedObject.GetIterator();
         serializedProperty.NextVisible(true);
         DrawProperties(serializedProperty);
-        if (GUILayout.Button("save"))
+        if (GUILayout.Button("Add"))
         {
             obs = GetAllInstances<Obstacles>();
             if (newObs.obstacleName == null)

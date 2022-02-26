@@ -9,6 +9,7 @@ public class EditorWindowGameData : EditorWindow
 
     protected HolePlayer[] hole;
     protected Obstacles[] obstacles;
+    protected Obstacles[] obsOld;
     protected string selectedPropertyPach;
     protected string selectedProperty;
 
@@ -22,6 +23,7 @@ public class EditorWindowGameData : EditorWindow
 
     private void OnGUI()
     {
+       
         hole = GetAllInstancesHole<HolePlayer>();
         obstacles = GetAllInstancesObstacles<Obstacles>();
         //EditorGUILayout.LabelField("Player Data");
@@ -46,15 +48,12 @@ public class EditorWindowGameData : EditorWindow
                     Apply();
                 }
             }
+            
             for (int i = 0; i < obstacles.Length; i++)
             {
                 if (obstacles[i].obstacleName == selectedProperty)
                 {
-                    serializedObject = new SerializedObject(obstacles[i]);
-                    serializedProperty = serializedObject.GetIterator();
-                    serializedProperty.NextVisible(true);
-                    DrawProperties(serializedProperty);
-                    Apply();
+                    ForObstacle(i);
                 }
             }
         }
@@ -65,7 +64,17 @@ public class EditorWindowGameData : EditorWindow
 
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
+    }
 
+    protected void ForObstacle(int i)
+    {
+        obsOld = GetAllInstancesObstacles<Obstacles>();
+        serializedObject = new SerializedObject(obstacles[i]);
+        serializedProperty = serializedObject.GetIterator();
+        serializedProperty.NextVisible(true);
+        DrawProperties(serializedProperty);
+        EditorGUILayout.LabelField("*New obstacle name must be copy & pasted due to an existing bug");
+        Apply();
         
     }
 
