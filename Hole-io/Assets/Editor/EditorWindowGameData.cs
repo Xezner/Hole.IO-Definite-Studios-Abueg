@@ -19,6 +19,9 @@ public class EditorWindowGameData : EditorWindow
     private void OnGUI()
     {
         hole = GetAllInstances<Hole>();
+        serializedObject = new SerializedObject(hole[0]);
+        EditorGUILayout.LabelField("Player Data");
+        EditorGUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
 
         for (int i = 0; i < hole.Length; i++)
         {
@@ -27,6 +30,10 @@ public class EditorWindowGameData : EditorWindow
             serializedProperty.NextVisible(true);
             DrawProperties(serializedProperty);
         }
+
+        EditorGUILayout.EndVertical();
+
+        Apply();
     }
 
     protected void DrawProperties(SerializedProperty p)
@@ -49,5 +56,10 @@ public class EditorWindowGameData : EditorWindow
         }
 
         return a;
+    }
+
+    protected void Apply()
+    {
+        serializedObject.ApplyModifiedProperties();
     }
 }
